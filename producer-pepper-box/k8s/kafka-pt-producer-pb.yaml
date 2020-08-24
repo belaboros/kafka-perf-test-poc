@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-pt-producer-pb
+  labels:
+    app: kafka-pt-producer-pb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-pt-producer-pb
+  template:
+    metadata:
+      labels:
+        app: kafka-pt-producer-pb
+    spec:
+      containers:
+      - name: kafka-pt-producer-pb
+        image: belaboros/kafka-pt-producer-pepper-box
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "400m"
+          limits:
+            memory: "50Mi"
+            cpu: "400m"
+#        env:
+#        - name: SLEEP_SEC
+#          value: "1"
+
+
+# 10 log records/sec/POD
+#        - name: SLEEP_SEC
+#          value: "0.12"
+
+# 43 log records/sec/POD
+#        - name: SLEEP_SEC
+#          value: "0.02"
+
+
+# NOTES:
+# 150milli CPU cores was enough to generate
+#    ~43 log records/sec/POD
+#    ~2500 log records/min/POD
+# on messaging-acc/octopus cluster

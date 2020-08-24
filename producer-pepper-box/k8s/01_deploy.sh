@@ -1,0 +1,1 @@
+kubectl apply --filename=kafka-pt-producer-pb.yaml

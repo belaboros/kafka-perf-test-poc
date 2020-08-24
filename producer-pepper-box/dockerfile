@@ -1,0 +1,34 @@
+#FROM openjdk:8-jdk-alpine
+#ARG JAR_FILE=target/*.jar
+#COPY ${JAR_FILE} app.jar
+#ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+FROM openjdk:11
+
+
+COPY pepper-box/target/pepper-box-1.0.jar /app/app.jar
+COPY producer-k8s.properties /app/
+COPY log4j.properties /app/
+COPY schema.json /app/
+
+
+WORKDIR /app
+
+#CMD ["java", "-version"]
+#ENTRYPOINT ["java","-cp","app:app/lib/*","hello.Application"]
+#ENTRYPOINT ["java","-cp","/app/app.jar" ]
+
+
+#java \
+#    -Dlog4j.configuration=file:${SCRIPT_DIR}/log4j.properties \
+#    -cp ${SCRIPT_DIR}/pepper-box/target/pepper-box-1.0.jar \
+#    com.gslab.pepper.PepperBoxLoadGenerator \
+#    --schema-file ${SCRIPT_DIR}/schema.json \
+#    --producer-config-file ${SCRIPT_DIR}/producer-local.properties \
+#    --throughput-per-producer 30 \
+#    --test-duration 20 \
+#    --num-producers 1
+
+ENTRYPOINT ["java", "-Dlog4j.configuration=file:/app/log4j.properties", "-cp","/app/app.jar", "com.gslab.pepper.PepperBoxLoadGenerator", "--schema-file","/app/schema.json", "--producer-config-file","/app/producer-k8s.properties", "--throughput-per-producer","30", "--test-duration","20", "--num-producers","1" ]
+
