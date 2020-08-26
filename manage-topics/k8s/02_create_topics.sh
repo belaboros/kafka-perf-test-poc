@@ -12,7 +12,7 @@ do
     TOPIC=pt-${PARTITIONS}p-${REPLICATIONS}r
     echo -e "Creating topic: ${TOPIC}"
 
-    kubectl exec -ti ${CLUSTER_NAME}-kafka-0 --container=kafka  --  /opt/kafka/bin/kafka-topics.sh --create --topic ${TOPIC} --partitions ${PARTITIONS} --replication-factor ${REPLICATIONS} --bootstrap-server=localhost:9092
+    kubectl exec -ti ${CLUSTER_NAME}-kafka-0 --container=kafka  --  /opt/kafka/bin/kafka-topics.sh --create --topic ${TOPIC} --partitions ${PARTITIONS} --replication-factor ${REPLICATIONS} --bootstrap-server=${BOOTSTRAP_SERVER} --command-config /tmp/ssl-user-config.properties
 
     #/opt/confluent/bin/kafka-topics \
     #  --zookeeper ${ZOOKEEPER} \

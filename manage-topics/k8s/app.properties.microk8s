@@ -1,0 +1,6 @@
+BOOTSTRAP_SERVER=my-cluster-kafka-bootstrap:9092
+#BOOTSTRAP_SERVER=localhost:9092
+
+NAMESPACE=local-dev
+CLUSTER_NAME=my-cluster
+

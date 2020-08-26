@@ -1,4 +1,4 @@
-source test.properties
+source app.properties
 
 
 for REPLICATIONS in 1 3

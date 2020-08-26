@@ -12,7 +12,7 @@ do
     TOPIC=pt-${PARTITIONS}p-${REPLICATIONS}r
     echo -e "Deleting topic: ${TOPIC}"
 
-    kubectl exec -ti ${CLUSTER_NAME}-kafka-0 --container=kafka  --  /opt/kafka/bin/kafka-topics.sh --delete --topic ${TOPIC} --bootstrap-server=localhost:9092
+    kubectl exec -ti ${CLUSTER_NAME}-kafka-0 --container=kafka  --  /opt/kafka/bin/kafka-topics.sh --delete --topic ${TOPIC} --bootstrap-server=${BOOTSTRAP_SERVER}
 
     #/opt/confluent/bin/kafka-topics \
     #  --zookeeper ${ZOOKEEPER} \
